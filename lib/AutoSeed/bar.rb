@@ -1,6 +1,6 @@
 
   class Bar
     def self.baz
-      puts "BarBaz"
+      puts "BarBaz "
     end
   end
