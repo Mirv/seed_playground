@@ -4,7 +4,12 @@
 
   class Foo
     def self.bar
-      puts "Foobar"
+      Rails.application.eager_load!
+
+      models = ActiveRecord::Base.descendants
+
+      attributes = models[19].first.attributes
+
     end
   end
 
