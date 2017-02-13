@@ -7,8 +7,15 @@
       Rails.application.eager_load!
 
       models = ActiveRecord::Base.descendants
+      Industry.connection
 
-      attributes = models[19].first.attributes
+      ActiveRecord::Base.descendants.map { |model| model.name } & ["Industry"]
+
+      puts FilterItem.all.map { |model|
+         model.attributes.map { |k,v| "#{k}: #{v}"
+         }.join(", ")
+      }.join(",\n")
+
 
     end
   end
