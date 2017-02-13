@@ -1,21 +1,26 @@
-# require "AutoSeed/version"
  require "AutoSeed/bar"
  require "AutoSeed/railtie" if defined?(Rails)
 
   class Foo
-    def self.bar
+    def self.bar (params = {})
       Rails.application.eager_load!
 
-      models = ActiveRecord::Base.descendants
-      Industry.connection
+      included_models = params['INCLUDE'].split(',')
 
-      ActiveRecord::Base.descendants.map { |model| model.name } & ["Industry"]
+      # Filter the list of models from Active Record
+      models = ActiveRecord::Base.descendants.map { |model|
+        model.name } & included_models
 
-      puts FilterItem.all.map { |model|
-         model.attributes.map { |k,v| "#{k}: #{v}"
+      models.each do | model_name |
+
+      # Print the model creation method
+      puts "[" + model_name.classify.constantize.all.map { |model|
+         model.attributes.map { |key, attribute|
+           "#{key}: '#{attribute}'"
          }.join(", ")
-      }.join(",\n")
+      }.join(",\n") + "]"
 
+        end
 
     end
   end
