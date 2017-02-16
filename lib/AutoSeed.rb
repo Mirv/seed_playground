@@ -1,7 +1,7 @@
  require "AutoSeed/railtie" if defined?(Rails)
 
-  class Foo
-    def self.bar (params = {})
+  class AutoSeed
+    def self.generate (params = {})
       Rails.application.eager_load!
 
       # Filter the list of models from Active Record

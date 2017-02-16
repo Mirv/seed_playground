@@ -1,5 +1,5 @@
 namespace :db do
   task :create_seeds => :environment do
-    Foo.bar(ENV)
+    AutoSeed.generate(ENV)
   end
 end
