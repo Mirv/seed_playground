@@ -1,4 +1,3 @@
- require "AutoSeed/bar"
  require "AutoSeed/railtie" if defined?(Rails)
 
   class Foo
