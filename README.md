@@ -19,9 +19,9 @@ Or install it yourself as:
 
 ## Examples
 
-rake db:create_seeds INCLUDE=User,Industry,Language
+rake db:seed:generate INCLUDE=User,Industry,Language
 
-rake db:create_seeds EXCLUDE=Session,Status
+rake db:seed:generate EXCLUDE=Session,Status
 
 ## License
 

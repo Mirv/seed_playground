@@ -1,5 +1,7 @@
 namespace :db do
-  task :create_seeds => :environment do
-    AutoSeed.generate(ENV)
+  namespace :seed do
+    task :generate => :environment do
+        AutoSeed.generate(ENV)
+    end
   end
 end
