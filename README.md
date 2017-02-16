@@ -20,6 +20,7 @@ Or install it yourself as:
 ## Examples
 
 rake db:create_seeds INCLUDE=User,Industry,Language
+
 rake db:create_seeds EXCLUDE=Session,Status
 
 ## License
