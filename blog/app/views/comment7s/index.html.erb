@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Comment7s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Post</th>
+      <th>Something</th>
+      <th>Somethingelse</th>
+      <th>Something</th>
+      <th>More</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment7s.each do |comment7| %>
+      <tr>
+        <td><%= comment7.content %></td>
+        <td><%= comment7.post %></td>
+        <td><%= comment7.something %></td>
+        <td><%= comment7.somethingelse %></td>
+        <td><%= comment7.something %></td>
+        <td><%= comment7.more %></td>
+        <td><%= link_to 'Show', comment7 %></td>
+        <td><%= link_to 'Edit', edit_comment7_path(comment7) %></td>
+        <td><%= link_to 'Destroy', comment7, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment7', new_comment7_path %>

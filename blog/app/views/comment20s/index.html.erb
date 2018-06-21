@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Comment20s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Post</th>
+      <th>Something</th>
+      <th>Somethingelse</th>
+      <th>Something more</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment20s.each do |comment20| %>
+      <tr>
+        <td><%= comment20.content %></td>
+        <td><%= comment20.post %></td>
+        <td><%= comment20.something %></td>
+        <td><%= comment20.somethingelse %></td>
+        <td><%= comment20.something_more %></td>
+        <td><%= link_to 'Show', comment20 %></td>
+        <td><%= link_to 'Edit', edit_comment20_path(comment20) %></td>
+        <td><%= link_to 'Destroy', comment20, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment20', new_comment20_path %>

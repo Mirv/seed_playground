@@ -1,0 +1,37 @@
+<%= form_for(@comment12) do |f| %>
+  <% if @comment12.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment12.errors.count, "error") %> prohibited this comment12 from being saved:</h2>
+
+      <ul>
+      <% @comment12.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= f.label :post_id %><br>
+    <%= f.text_field :post_id %>
+  </div>
+  <div class="field">
+    <%= f.label :something %><br>
+    <%= f.number_field :something %>
+  </div>
+  <div class="field">
+    <%= f.label :somethingelse %><br>
+    <%= f.text_field :somethingelse %>
+  </div>
+  <div class="field">
+    <%= f.label :something_more %><br>
+    <%= f.text_field :something_more %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

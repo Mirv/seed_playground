@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Comment12s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Post</th>
+      <th>Something</th>
+      <th>Somethingelse</th>
+      <th>Something more</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment12s.each do |comment12| %>
+      <tr>
+        <td><%= comment12.content %></td>
+        <td><%= comment12.post %></td>
+        <td><%= comment12.something %></td>
+        <td><%= comment12.somethingelse %></td>
+        <td><%= comment12.something_more %></td>
+        <td><%= link_to 'Show', comment12 %></td>
+        <td><%= link_to 'Edit', edit_comment12_path(comment12) %></td>
+        <td><%= link_to 'Destroy', comment12, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment12', new_comment12_path %>
