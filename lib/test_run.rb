@@ -3,19 +3,21 @@ require 'AutoSeed'
 require 'logger'
 
 class TestRun 
-  def self.my_logger
-    @@my_logger ||= Logger.new("#{Rails.root}/log/speed_check.log")
+  def self.my_logger(target)
+    # @my_logger ||= Logger.new("#{Rails.root}/log/speed_check2.log")
+    @my_logger[target] ||= Logger.new("#{Rails.root}/log/#{target}.log")
   end
   
   
-  @@logs ={}    # Class variable as it must persist
+  @logs ={}    # Class variable as it must persist
   @tests = {
     one: AutoSeed.method(:generate), 
     two: AutoSeed2.method(:generate),
     three: AutoSeed3.method(:generate)
   }
   #  Tracking arrays for test being inserted to the class variable logs
-  @tests.each{|x, y| @@logs[x]= []}
+  @tests.each{|x, y| @logs[x]= []}
+  # @tests
 
   # Send both attributes to the eigenClass  
   class << self
@@ -28,14 +30,19 @@ class TestRun
 
   def self.time_test
     @tests.each do |x, y|
-      t = timer do
+      @logs[x] << timer do 
         y.call
       end 
-      @@logs[x] << t
-      @@logs.map{|key, value| puts "--Test #{key}'s count: #{@@logs[x].count}" }
-      class_target = y.to_s.split(" ").last.split('.').first
-      my_logger.info("#{class_target}, #{t.real} --- #{self.name}")
-      # byebug
+    end
+    report_results
+  end
+  
+  def self.report_results
+    @logs.each do |key, value| 
+      puts "--Test #{key}'s count: #{@logs[key].count}" 
+      class_target = @tests[key].to_s.split(" ").last.split('.').first
+      formatted_time = @logs[key].first.real.round(5)
+      my_logger.info("#{class_target}, #{formatted_time} - #{self.name}")
     end
   end
 
@@ -45,11 +52,14 @@ class TestRun
     }
   end
   
+  def self.format_times
+  end
+  
 end
 
 
 
 
-    # puts "First:  #{@@logs[:one].count}"
-    # puts "Second #{@@logs[:two].count}"
-    # puts "Third #{@@logs[:three].count}"
+    # puts "First:  #{@logs[:one].count}"
+    # puts "Second #{@logs[:two].count}"
+    # puts "Third #{@logs[:three].count}"
