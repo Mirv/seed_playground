@@ -1,6 +1,6 @@
 require 'benchmark'
 require 'AutoSeed'    # TODO - need to dynamically handle this?
-load '../lib/AutoFileLogger.rb'
+load '../lib/AutoFileLogger.rb' # TODO - need to figure out why can't require this?
 
 class TestRun 
   
@@ -38,7 +38,7 @@ class TestRun
     end
   end
   
-  # TODO - would be nice not to explicitly execute #logger everytime
+  # Formatting on the messages
   def self.write_test_result(test, time)
     @logging.write_log(test, "#{time.real.round(5)} - #{self.name}")
   end
