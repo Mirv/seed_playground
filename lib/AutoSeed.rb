@@ -1,14 +1,6 @@
 require "AutoSeed/railtie" if defined?(Rails)
 require 'benchmark'
 
-# add in error handling
-# add in randomizer
-# add in ActiveRecord::Migration.check_pending! check
-# add a block for #memsize_of to 
-
-# Notes - successive runs of seeding a single entry in a db repeatedly are twice 
-#  as fast when when done in class 2
-
 class AutoSeed
   def self.generate (params = {})
     Rails.application.eager_load!
@@ -33,10 +25,13 @@ class AutoSeed
   end
 end
 
-
+# TODO - add in error handling - done
+# TODO - add in ActiveRecord::Migration.check_pending! check
+# TODO - add a block for finger print of the filesize to be added to name
 
 class AutoSeed2
   def self.generate (params = {})
+    raise Error.new("Migrations Pending") if ActiveRecord::Migration.check_pending!
     Rails.application.eager_load!                   # Ensures models loaded
     reject_attribs = ["id", "created_at", "updated_at"]  # Attributes to filter
     insert_string = "Blah1234"                      # default string in attributes
@@ -56,13 +51,9 @@ class AutoSeed2
   end
 end
 
-# AutoSeed3 - ran first
-# 0.3182739010080695
-# 0.1012919049244374
-# 0.25594839500263333
-# 0.23066043807193637
-# 0.12145069893449545
+# add in randomizer or this slows system too much?
 
+# Slowest version
 class AutoSeed3
   def self.generate (params = {})
     Rails.application.eager_load!                   # Ensures models loaded
