@@ -2,13 +2,13 @@ namespace :db do
   namespace :seed do
     desc "test the speed of AutoSeed"
     task :spdtest => :environment do
-      puts Dir.pwd
+      puts "Rake directory is #{Dir.pwd}"
       FileUtils.mkdir_p('log/benchmark') unless File.directory?('log/benchmark')  
       # touch 'benchmarks/'
       load '../lib/AutoSeed.rb'
       # require 'AutoSeed'
       load '../lib/test_run.rb'
-      puts "Dir? #{Dir.exists? '../lib/SpeedLogger'}"
+      # puts "Dir? #{Dir.exists? '../lib/SpeedLogger'}"
       # load '../lib/SpeedLogger/speed_logger.rb'
       load '../lib/SpeedLogger.rb'
       # require 'SpeedLogger'

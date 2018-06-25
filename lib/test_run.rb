@@ -51,6 +51,7 @@ class TestRun
   
   def self.write_test_result(test, time)
     class_target = @tests[test].to_s.split(" ").last.split('.').first
+    # puts class_target
     @logging.logger(class_target)
     @logging.write_log(class_target, "#{time.first.real.round(5)} - #{self.name}")
     # my_logger[test]
