@@ -1,5 +1,3 @@
-# TODO - add in error handling - done
-# TODO - add in ActiveRecord::Migration.check_pending! check
 # TODO - add a block for finger print of the filesize to be added to name
 
 class AutoSeed2
@@ -19,7 +17,7 @@ class AutoSeed2
       attribs = model.column_names - reject_attribs       # drop extra db columns 
       attribs = attribs.map {|x| [x, insert_string]}.to_h # setup hash of columns
       result = model.find_or_create_by!(attribs)          # save error msgs 
-      # puts result                                         # output results
+      puts result if result.errors.present?               # output errors
     end
   end
 end
