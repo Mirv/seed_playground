@@ -15,10 +15,11 @@ class TestRun
     two: AutoSeed2.method(:generate),
     three: AutoSeed3.method(:generate)
   }
-  @logging = AutoFileLogger.new(folder: "benchmark")
+  
 
   def self.test_run(params = {})
     @tests = params.merge(@test_defaults)
+    @logging = AutoFileLogger.new(folder: "benchmark")
     time_test
   end
 
