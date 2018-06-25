@@ -1,11 +1,10 @@
 
   # Store log files in same folder
-  # Initialize new log files, but which ones 
-  # Access said log files, preferably without a ba-jillion if statements
+  # Initialize new log files, but remember which ones 
+  # Generate name base on method / class / size of class
+  # Access said log files
   # Hide away these tasks behind a wall of secrecy 
   
-  # TODO - add in the filesize as a fingerprint to file name
-
 class AutoFileLogger
   attr_accessor :logger
   
@@ -39,6 +38,6 @@ class AutoFileLogger
   end
   
   def write_log(name, message)
-    @logger[name].info(message) # writes but doesn't check #logger
+    @logger[name].info(message) # TODO - writes but doesn't check #logger
   end
 end
