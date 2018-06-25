@@ -10,14 +10,15 @@ class TestRun
     attr_accessor :tests
   end
   
-  @tests = {
+  @test_defaults = {
     # one: AutoSeed.method(:generate),
     two: AutoSeed2.method(:generate),
     three: AutoSeed3.method(:generate)
   }
   @logging = AutoFileLogger.new(folder: "benchmark")
 
-  def self.test_run
+  def self.test_run(params = {})
+    @tests = params.merge(@test_defaults)
     time_test
   end
 

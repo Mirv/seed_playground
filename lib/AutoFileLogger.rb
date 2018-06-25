@@ -3,8 +3,7 @@
   # Initialize new log files, but remember which ones 
   # Generate name base on method / class / size of class
   # Access said log files
-  # Hide away these tasks behind a wall of secrecy 
-  
+
 class AutoFileLogger
   attr_accessor :logger
   
