@@ -2,8 +2,8 @@ require 'benchmark'
 require 'AutoSeed'    # TODO - need to dynamically handle this?
 # require 'logger'
 # require 'SpeedLogger'
-require '../lib/SpeedLogger.rb'
-# require 'SpeedLogger'
+load '../lib/AutoFileLogger.rb'
+# require 'AutoFileLogger'
 
 
 class TestRun 
@@ -16,12 +16,12 @@ class TestRun
   
     @logs ={}    # Class variable as it must persist
     @tests = {
-      # one: AutoSeed.method(:generate),
+      one: AutoSeed.method(:generate),
       two: AutoSeed2.method(:generate),
-      # three: AutoSeed3.method(:generate)
+      three: AutoSeed3.method(:generate)
     }
     # byebug
-    @logging = ::SpeedLogger.new(folder: "benchmark")
+    @logging = AutoFileLogger.new(folder: "benchmark")
     
     
     #  Tracking arrays for test being inserted to the class variable logs
@@ -40,8 +40,7 @@ class TestRun
   def self.time_test
     @tests.each do |x, y|
       # @logs[x] << timer do 
-      t=[]
-      t << timer do
+      t = timer do
         y.call
       end 
       write_test_result(x,t)
@@ -51,18 +50,17 @@ class TestRun
   
   def self.write_test_result(test, time)
     class_target = @tests[test].to_s.split(" ").last.split('.').first
-    # puts class_target
     @logging.logger(class_target)
-    @logging.write_log(class_target, "#{time.first.real.round(5)} - #{self.name}")
-    # my_logger[test]
-    # my_logger[test].info("#{class_target}, #{time.real.round(5)} - #{self.name}")
+    # @logging.write_log(class_target, "#{time.first.real.round(5)} - #{self.name}")
+    @logging.write_log(class_target, "#{time.real.round(5)} - #{self.name}")
   end
   
   # TODO - remove or redefine without @logs
   def self.report_results
     @logs.each do |key, value| 
       class_target = @tests[key].to_s.split(" ").last.split('.').first
-      formatted_time = @logs[key].first.real.round(5)
+      # formatted_time = @logs[key].first.real.round(5)
+      formatted_time = @logs[key].real.round(5)
       my_logger.info("#{class_target}, #{formatted_time} - #{self.name}")
     end
   end

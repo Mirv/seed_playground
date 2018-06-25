@@ -4,15 +4,8 @@ namespace :db do
     task :spdtest => :environment do
       puts "Rake directory is #{Dir.pwd}"
       FileUtils.mkdir_p('log/benchmark') unless File.directory?('log/benchmark')  
-      # touch 'benchmarks/'
       load '../lib/AutoSeed.rb'
-      # require 'AutoSeed'
       load '../lib/test_run.rb'
-      # puts "Dir? #{Dir.exists? '../lib/SpeedLogger'}"
-      # load '../lib/SpeedLogger/speed_logger.rb'
-      load '../lib/SpeedLogger.rb'
-      # require 'SpeedLogger'
-      # require 'TestRun'
       TestRun.test_run()
     end
 
