@@ -23,11 +23,11 @@ class TestRun
 
   def self.time_test
     @tests.each do |x, y|
-      
       t = timer do
         y.call
       end 
-      write_test_result(@logging.logger(@tests[x], y.name), t)
+      target_test = @logging.logger(@tests[x], y.name)
+      write_test_result(target_test, t)
     end
   end
 

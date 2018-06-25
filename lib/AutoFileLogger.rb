@@ -40,8 +40,6 @@ class AutoFileLogger
   end
   
   def write_log(log, message)
-    #  returns the logger object currently with logging.logger in the params
-    # @logger[name].info(message) # TODO - writes but doesn't check #logger
     log.info(message) # TODO - writes but doesn't check #logger
   end
 end
