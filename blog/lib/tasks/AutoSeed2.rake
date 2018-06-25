@@ -8,6 +8,8 @@ namespace :db do
       load '../lib/AutoSeed.rb'
       require 'AutoSeed'
       load '../lib/test_run.rb'
+      load '../speed_logger.rb'
+      require 'SpeedLogger'
       # require 'TestRun'
       TestRun.test_run()
     end
@@ -19,10 +21,10 @@ namespace :db do
       end
       desc "2nd seeding task with methods"
       task :generate2 => :environment do
-          load '../lib/AutoSeed.rb'
-          require 'AutoSeed'
-          puts "Entering the gen2"
-          AutoSeed2.generate(ENV)
+        load '../lib/AutoSeed.rb'
+        require 'AutoSeed'
+        puts "Entering the gen2"
+        AutoSeed2.generate(ENV)
       end
     end
   end
