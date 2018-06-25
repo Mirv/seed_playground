@@ -14,22 +14,18 @@ class TestRun
     name = @tests[target].to_s.split(" ").last.split('.').first
   end
   
-    @logs ={}    # Class variable as it must persist
     @tests = {
       one: AutoSeed.method(:generate),
       two: AutoSeed2.method(:generate),
       three: AutoSeed3.method(:generate)
     }
-    # byebug
     @logging = AutoFileLogger.new(folder: "benchmark")
-    
-    
-    #  Tracking arrays for test being inserted to the class variable logs
-    @tests.each{|x, y| @logs[x]= []}
+
+
 
   # Send both attributes to the eigenClass  
   class << self
-    attr_accessor :tests, :logs
+    attr_accessor :tests
   end
 
   def self.test_run
@@ -39,32 +35,19 @@ class TestRun
 
   def self.time_test
     @tests.each do |x, y|
-      # @logs[x] << timer do 
       t = timer do
         y.call
       end 
       write_test_result(x,t)
     end
-    # report_results  # TODO - remove or uncomment after redefining
   end
   
   def self.write_test_result(test, time)
     class_target = @tests[test].to_s.split(" ").last.split('.').first
     @logging.logger(class_target)
-    # @logging.write_log(class_target, "#{time.first.real.round(5)} - #{self.name}")
     @logging.write_log(class_target, "#{time.real.round(5)} - #{self.name}")
   end
   
-  # TODO - remove or redefine without @logs
-  def self.report_results
-    @logs.each do |key, value| 
-      class_target = @tests[key].to_s.split(" ").last.split('.').first
-      # formatted_time = @logs[key].first.real.round(5)
-      formatted_time = @logs[key].real.round(5)
-      my_logger.info("#{class_target}, #{formatted_time} - #{self.name}")
-    end
-  end
-
   def self.timer
     Benchmark.measure {
       yield
@@ -75,10 +58,3 @@ class TestRun
   end
   
 end
-
-
-
-
-    # puts "First:  #{@logs[:one].count}"
-    # puts "Second #{@logs[:two].count}"
-    # puts "Third #{@logs[:three].count}"
