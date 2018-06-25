@@ -2,6 +2,7 @@ require 'benchmark'
 require 'AutoSeed'    # TODO - need to dynamically handle this?
 load '../lib/AutoSeed2.rb' # TODO - need to figure out why can't require this?
 load '../lib/AutoFileLogger.rb' # TODO - need to figure out why can't require this?
+load '../lib/AutoSeed3.rb' # TODO - need to figure out why can't require this?
 
 class TestRun 
   # Send attributes to the eigenClass  
@@ -27,7 +28,7 @@ class TestRun
       end 
       test = @logging.discover_log_name(@tests[x], y.name)
       puts "File written to: #{test}.log"
-      @logging.logger(test)   # TODO - figure out why I have to initialize this explicitly
+      @logging.logger(test)   # TODO - it needs to Initialize this explicitly
       write_test_result(test,t)
     end
   end
