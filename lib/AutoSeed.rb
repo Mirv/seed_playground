@@ -51,7 +51,7 @@ class AutoSeed2
       attribs = model.column_names - reject_attribs       # drop extra db columns 
       attribs = attribs.map {|x| [x, insert_string]}.to_h # setup hash of columns
       result = model.find_or_create_by!(attribs)          # save error msgs 
-      puts result                                         # output results
+      # puts result                                         # output results
     end
   end
 end
