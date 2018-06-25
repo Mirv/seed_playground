@@ -1,10 +1,6 @@
 require 'benchmark'
 require 'AutoSeed'    # TODO - need to dynamically handle this?
-# require 'logger'
-# require 'SpeedLogger'
 load '../lib/AutoFileLogger.rb'
-# require 'AutoFileLogger'
-
 
 class TestRun 
   
@@ -14,14 +10,12 @@ class TestRun
     name = @tests[target].to_s.split(" ").last.split('.').first
   end
   
-    @tests = {
-      one: AutoSeed.method(:generate),
-      two: AutoSeed2.method(:generate),
-      three: AutoSeed3.method(:generate)
-    }
-    @logging = AutoFileLogger.new(folder: "benchmark")
-
-
+  @tests = {
+    # one: AutoSeed.method(:generate),
+    two: AutoSeed2.method(:generate),
+    three: AutoSeed3.method(:generate)
+  }
+  @logging = AutoFileLogger.new(folder: "benchmark")
 
   # Send both attributes to the eigenClass  
   class << self
@@ -38,14 +32,15 @@ class TestRun
       t = timer do
         y.call
       end 
-      write_test_result(x,t)
+      test = @tests[x].to_s.split(" ").last.split('.').first
+      @logging.logger(test)   # TODO - figure out why I have to initialize this explicitly
+      write_test_result(test,t)
     end
   end
   
+  # TODO - would be nice not to explicitly execute #logger everytime
   def self.write_test_result(test, time)
-    class_target = @tests[test].to_s.split(" ").last.split('.').first
-    @logging.logger(class_target)
-    @logging.write_log(class_target, "#{time.real.round(5)} - #{self.name}")
+    @logging.write_log(test, "#{time.real.round(5)} - #{self.name}")
   end
   
   def self.timer
