@@ -23,13 +23,11 @@ class TestRun
 
   def self.time_test
     @tests.each do |x, y|
+      
       t = timer do
         y.call
       end 
-      test = @logging.discover_log_name(@tests[x], y.name)
-      puts "File written to: #{test}.log"
-      @logging.logger(test)   # TODO - it needs to Initialize this explicitly
-      write_test_result(test,t)
+      write_test_result(@logging.logger(@tests[x], y.name), t)
     end
   end
 
