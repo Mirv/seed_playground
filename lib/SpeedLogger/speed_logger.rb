@@ -4,21 +4,11 @@ class SpeedLogger
   # Access said log files, preferably without a ba-jillion if statements
   # Hide away these tasks behind a wall of secrecy 
   #
-  # def initialize(args)
-  #   # load test names
-  #   # if the folder doesn't exist create it
-  #   # create a folder for every file mentioned or wait till its called
-  # end
-  
-  # Looking for folder name in hash to make new folder if needed
-  # folder directory has
-  def initialize(*args)
-    # byebug
-    @folder = args.first[:folder] 
-    # blah ||= 'benchmarks'
-    folder_handler(@folder)
-    # @file, @classname, message = *args 
 
+  # Accepts new directory name in :folder 
+  def initialize(*args)
+    @folder = args.first[:folder] 
+    folder_handler(@folder)
     @logger = {}
   end
   
@@ -40,8 +30,6 @@ class SpeedLogger
   
   # log writer
   def write_log(name, message)
-    # filename =
-    # message =
     @logger[name].info(message)
   end
 end
