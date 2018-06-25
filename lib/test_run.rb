@@ -48,8 +48,5 @@ class TestRun
       yield
     }
   end
-  
-  def self.format_times
-  end
-  
+
 end
