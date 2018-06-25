@@ -23,7 +23,6 @@ class TestRun
   end
 
   def self.test_run
-    # initialize
     time_test
   end
 
