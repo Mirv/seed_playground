@@ -1,7 +1,6 @@
 require 'benchmark'
 require 'AutoSeed'    # TODO - need to dynamically handle this?
-# require 'AutoSeed2'
-load '../lib/AutoSeed2.rb'
+load '../lib/AutoSeed2.rb' # TODO - need to figure out why can't require this?
 load '../lib/AutoFileLogger.rb' # TODO - need to figure out why can't require this?
 
 class TestRun 
