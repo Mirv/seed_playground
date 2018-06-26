@@ -8,10 +8,11 @@ class AutoSeed2
     reject_attribs = ["id", "created_at", "updated_at"]  # Attributes to filter
     insert_string = "Blah1234"                        # default string in attributes
 
+    # models = models.reject{|model| reject_models.include? model.name}
     # Filter the list of models from Active Record based on options in params
     models = ActiveRecord::Base.descendants
-    # models = models.reject{|model| reject_models.include? model.name}
-    models = models.map { |model| model.name }.reject{|model| reject_models.include? model}
+    models = models.map(&:name) - reject_models  # remove any from above
+    
     models = models & params['INCLUDE'].split(',') if params['INCLUDE']
     models = models | params['REJECT'].split(',') if params['REJECT']
 
