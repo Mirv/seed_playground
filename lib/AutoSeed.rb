@@ -1,5 +1,4 @@
 require "AutoSeed/railtie" if defined?(Rails)
-require 'benchmark'
 
 class AutoSeed
   def self.generate (params = {})
@@ -9,7 +8,7 @@ class AutoSeed
     models = ActiveRecord::Base.descendants.map { |model| model.name }
 
     models = models & params['INCLUDE'].split(',') if params['INCLUDE']
-    models = models | params['REJECT'].split(',') if params['REJECT']
+    models = models || params['REJECT'].split(',') if params['REJECT']
 
     models.each do | model_name |
 

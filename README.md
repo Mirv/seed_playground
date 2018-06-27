@@ -19,9 +19,25 @@ Or install it yourself as:
 
 ## Examples
 
+rake db:seed:generate
+    => Runs against all models
+
 rake db:seed:generate INCLUDE=User,Industry,Language
+    => Runs only User, Industry, Language models
 
 rake db:seed:generate EXCLUDE=Session,Status
+    => Runs all but Session, Status models
+
+rake db:seed:v2:generate REPS=3   
+    =>  Runs 3 iterations 
+
+rake db:seed:v2:generate REPS=3 ONLY=User    
+    =>  Runs 3 iterations on the User model
+
+rake db:seed:speedtest
+    => {Setup rake task for this!}
+    
+TODO - gem for hanlding options logic
 
 ## License
 
