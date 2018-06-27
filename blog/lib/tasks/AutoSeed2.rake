@@ -19,9 +19,7 @@ namespace :db do
       desc "2nd seeding task with methods"
       task :generate2 => :environment do
         load '../lib/AutoSeed2.rb'
-        # require 'AutoSeed2'
-        puts "Entering the gen2"
-        AutoSeed2.generate()
+        AutoSeed2.generate(ENV)
       end
     end
   end

@@ -11,7 +11,7 @@ class TestRun
   end
   
   @test_defaults = {
-    # one: AutoSeed.method(:generate),
+    one: AutoSeed.method(:generate),
     two: AutoSeed2.method(:generate),
     three: AutoSeed3.method(:generate)
   }
