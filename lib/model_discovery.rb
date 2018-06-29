@@ -1,3 +1,5 @@
+# TODO relies on rake to load files for us
+
 class ModelDiscovery
   def self.find_models(only_models, ignore_models)
     Rails.application.eager_load!                     # Ensures models loaded
@@ -9,3 +11,4 @@ class ModelDiscovery
     return models   # return required here currently
   end
 end
+
