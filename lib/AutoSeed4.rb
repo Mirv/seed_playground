@@ -1,4 +1,10 @@
 class AutoSeed4 < SeedSuper
+  
+    # TODO - this chunk should be configured in a file somewhere ... yaml?
+    # TODO - faker gem should go in here
+    # TODO - wrap in it's own method - in prep for going to file or faker gem
+    # Preping the attributes
+  
   def self.generate_seeding(model_name, reps = 1)
     # Preping the attributes
     insert_string = "1234"                        # default string in attributes
