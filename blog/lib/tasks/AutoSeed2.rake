@@ -21,6 +21,14 @@ namespace :db do
         load '../lib/AutoSeed2.rb'
         AutoSeed2.generate(ENV)
       end
+      desc "2nd seeding task with methods"
+      task :generate4 => :environment do
+        load '../lib/SeedSuper.rb'
+        load '../lib/AutoSeed4.rb'
+        puts Post.count
+        AutoSeed4.generate(ENV)
+        puts Post.count
+      end
     end
   end
 end

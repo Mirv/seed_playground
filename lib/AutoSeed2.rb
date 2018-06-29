@@ -1,18 +1,16 @@
 # TODO - add a block for finger print of the filesize to be added to name
 
-class AutoSeed2
+class AutoSeed2 < AutoSuperSeed
   def self.generate (params = {})
     # Preping the models
     raise Error.new("Migrations Pending") if ActiveRecord::Migration.check_pending!
     Rails.application.eager_load!                     # Ensures models loaded
-    reject_models = ["ActiveRecord::SchemaMigration", params['EXCLUDE']&.split(',')]
+    reject_models = ["ActiveRecord::SchemaMigration"]
+    reject_models << params['EXCLUDE'].split(',') if params['EXCLUDE']
     models = ActiveRecord::Base.descendants.map(&:name) - reject_models.flatten 
     models = models & params['ONLY'].split(',') if params['ONLY']
 
-    # Preping the attributes
-    insert_string = "Blah1234"                        # default string in attributes
-    reject_attribs = ["id", "created_at", "updated_at"]  # Attributes to filter
-    params['REPS'] = 1 if params['REPS'].to_i < 0
+    params['REPS'] = 1 if params['REPS'].nil?
     models.each do | model_name |
       model = model_name.classify.constantize             # setup model to call
       attribs = model.column_names - reject_attribs       # drop extra db columns 
