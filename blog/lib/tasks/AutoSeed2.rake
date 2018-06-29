@@ -25,6 +25,7 @@ namespace :db do
       task :generate4 => :environment do
         load '../lib/SeedSuper.rb'
         load '../lib/AutoSeed4.rb'
+        load '../lib/model_discovery.rb'
         puts Post.count
         AutoSeed4.generate(ENV)
         puts Post.count
