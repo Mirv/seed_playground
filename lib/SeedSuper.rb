@@ -9,11 +9,14 @@ class SeedSuper
       # ensure positive integer passes to next
       reps = params['REPS'].present? ? params['REPS'].to_i : 1
       # STUB for the inheriting class to run here
-      generate_seeding(model_name, reps)
+      reps.times do 
+        model = model_name.classify.constantize
+        model.create!(make_fields model)         
+      end
     end
   end
   
-  def self.generate_seeding(model_name)
+  def self.make_fields(model_name)
     # name = self.method(self).name
     # TODO - feed class name & method name into the Error message
     raise Error.new("Generate requires subclass to over with instructions.")

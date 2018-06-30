@@ -23,9 +23,9 @@ namespace :db do
       end
       desc "2nd seeding task with methods"
       task :generate4 => :environment do
-        load '../lib/SeedSuper.rb'
-        load '../lib/AutoSeed4.rb'
-        load '../lib/model_discovery.rb'
+        load '../lib/AutoSeed/v2/SeedSuper.rb'
+        load '../lib/AutoSeed/v2/AutoSeed4.rb'
+        load '../lib/AutoSeed/v2/model_discovery.rb'
         puts Post.count
         AutoSeed4.generate(ENV)
         puts Post.count
