@@ -1,5 +1,5 @@
 # TODO - relies on rake to load files for us 
-
+# load 'SeedSuper.rb'
 class AutoSeed4 < SeedSuper
   
     # TODO - this chunk should be configured in a file somewhere ... yaml?

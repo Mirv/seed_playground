@@ -18,6 +18,7 @@ class AutoFileLogger
     @logger[the_class] ||= create_logfile(the_class, the_method)
   end
 
+  # TODO - write a method to put logname at top of file
   def folder_handler(dir_name = 'benchmarks')
     path = File.join(Rails.root, 'log', dir_name)
     FileUtils.mkdir_p path unless Dir.exists? path
