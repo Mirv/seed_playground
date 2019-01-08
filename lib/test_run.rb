@@ -5,8 +5,8 @@ load '../lib/AutoSeed/v1/AutoSeed2.rb' # TODO - need to figure out why can't req
 load '../lib/AutoSeed/v1/AutoSeed3.rb' # TODO - need to figure out why can't require this?
 load '../lib/AutoSeed/v2/SeedSuper.rb'
 load '../lib/AutoSeed/v2/AutoSeed4.rb'
-load '../lib/AutoSeed/v2/model_discovery.rb'
-load '../lib/AutoFileLogger.rb'
+load '../lib/AutoSeed/v2/ar_discovery.rb'
+load '../lib/MultiFileLogger.rb'
 
 class TestRun 
   # Send attributes to the eigenClass  
@@ -22,25 +22,31 @@ class TestRun
   }
   
   def self.test_run(params = {})
-    @tests = params.merge(@test_defaults)
-    @logging = AutoFileLogger.new(folder: "benchmark")
-    time_test
+    @tests = @test_defaults
+    # @tests = params.merge(@test_defaults) # TODO - allow merge of other test
+    @logging = MultiFileLogger.new(folder: "benchmark")
+    
+    time_test(params['REPS'])
   end
 
-  def self.time_test
+  def self.time_test(reps)
     @tests.each do |x, y|
       t = timer do
-        puts y.class.name
         y.call
       end 
       target_test = @logging.logger(@tests[x], y.name)
-      write_test_result(target_test, t)
+      puts y.name
+      write_test_result(target_test, t, reps)
     end
   end
 
   # Formatting on the messages
-  def self.write_test_result(test, time)
-    @logging.write_log(test, "#{time.real.round(5)} - #{self.name}")
+  def self.write_test_result(test, time, reps)
+    models = ARDiscovery.find_models(nil, nil)
+    counters = models.sum { |x| x.column_names.count }
+    reps = reps ? reps : 1
+    stats = "Repeat: #{reps} - #{ARDiscovery.prep_stats}"
+    @logging.write_log(test, "#{time.real.round(5)} - #{stats}")
   end
   
   def self.timer

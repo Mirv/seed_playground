@@ -24,8 +24,14 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ["lib", "lib/test"]
+  spec.test_files = [
+    # 'test/minitest_helper.rb',
+    # 'test/test_helper.rb',
+    # 'test/spec.rb'
+    ]
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "minitest"
 end

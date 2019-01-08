@@ -4,7 +4,7 @@
   # Generate name base on method / class / size of class
   # Access said log files
 
-class AutoFileLogger
+class MultiFileLogger
   attr_accessor :logger
   
   # Accepts new directory name in :folder 
@@ -15,14 +15,24 @@ class AutoFileLogger
   end
 
   def logger(the_class, the_method)
-    @logger[the_class] ||= create_logfile(the_class, the_method)
+    @logger[the_class] ||= log_handler(the_class, the_method)
+  end
+  
+  def log_handler(the_class, the_method)
+    log_name = discover_log_name(the_class, the_method)
+    file = File.join(Rails.root, 'log', @folder, "#{log_name}.log")
+    if File.exists? file
+      log = Logger.new(file)
+    else
+      log = Logger.new(file)
+      # Insert the header information via log.write(@header)
+    end
   end
 
   # TODO - write a method to put logname at top of file
   def folder_handler(dir_name = 'benchmarks')
     path = File.join(Rails.root, 'log', dir_name)
     FileUtils.mkdir_p path unless Dir.exists? path
-    # puts "Log directory path exists? #{Dir.exists? path}, path is #{path}"
   end
   
   # Requires the class name, method name & then it derives file size
@@ -32,14 +42,8 @@ class AutoFileLogger
     "#{class_name}_#{the_method}_#{class_size}"
   end
   
-  def create_logfile(the_class, the_method)
-    name = discover_log_name(the_class, the_method)
-    file = File.join(Rails.root, 'log', @folder, "#{name}.log")
-    puts "Log file:  #{name}"
-    Logger.new(file)
-  end
-  
   def write_log(log, message)
     log.info(message) # TODO - writes but doesn't check #logger
   end
+  
 end
