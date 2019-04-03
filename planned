@@ -1,0 +1,47 @@
+https://github.com/blocknotes/auto-seeding
+https://github.com/mochizukikotaro/auto_seed
+https://github.com/vitaliy-cro/smart_seeds
+
+---
+
+Raking
+
+https://stackoverflow.com/questions/1878640/including-rake-tasks-in-gems
+https://stackoverflow.com/questions/15446153/ruby-rake-load-tasks-from-a-gem 3 points! (1 in comment)
+https://stackoverflow.com/questions/14044034/include-rake-tasks-from-a-gem-into-my-engine
+https://stackoverflow.com/questions/12865776/rake-task-for-installing-gem-migrations-executing-only-once
+
+---
+
+Parsers & AST's 
+
+http://ruby-doc.org/stdlib-2.1.0/libdoc/ripper/rdoc/Ripper.html
+http://www.rubyguides.com/2015/08/static-analysis-in-ruby/ by Castello w/ripper
+
+---
+
+Plan
+
+---
+Concerns
+  - errors on rails migration pending
+  - discovering models
+  - only valid models selected
+
+  - only valid attributes selected
+  - discovering validations
+  - generating valid fake data on validations
+  
+  - mass / batch style db creation
+    - seems making hash of the record, then putting it in holder hash for single
+      call works really well
+    - alternatively if they aren't the same data you wrap all the calls in 
+      a transaction too
+
+---
+
+Classes
+  - Discovery
+    - models
+    - the attributes
+    - validations on attributes of models

@@ -1,5 +1,6 @@
 require 'benchmark'
-require 'AutoSeed'    # TODO - need to dynamically handle this?
+# require 'AutoSeed'    # TODO - need to dynamically handle this?
+load 'AutoSeed.rb'
 load '../lib/AutoSeed/v1/AutoSeed.rb' # TODO - need to figure out why can't require this?
 load '../lib/AutoSeed/v1/AutoSeed2.rb' # TODO - need to figure out why can't require this?
 load '../lib/AutoSeed/v1/AutoSeed3.rb' # TODO - need to figure out why can't require this?
@@ -48,6 +49,14 @@ class TestRun
     stats = "Repeat: #{reps} - #{ARDiscovery.prep_stats}"
     @logging.write_log(test, "#{time.real.round(5)} - #{stats}")
   end
+  
+  # TODO - this part need
+  # def self.prep_header
+    # models = ARDiscovery.find_models(nil, nil)
+    # counters = models.sum { |x| x.column_names.count }
+    # return "models: #{models.count}, columns: #{counters}"
+  # end
+  
   
   def self.timer
     Benchmark.measure {

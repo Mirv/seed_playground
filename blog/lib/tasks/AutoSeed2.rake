@@ -6,7 +6,7 @@ namespace :db do
       FileUtils.mkdir_p('log/benchmark') unless File.directory?('log/benchmark')  
       load '../lib/test_run.rb'
 
-      TestRun.test_run(ENV)
+      # TestRun.test_run(ENV)
       puts "~Fin (Rake)"
       Logger
     end
@@ -16,11 +16,13 @@ namespace :db do
       task :generate => :environment do
         AutoSeed.generate(ENV)
       end
+      
       desc "2nd seeding task with methods"
       task :generate2 => :environment do
         load '../lib/AutoSeed2.rb'
         AutoSeed2.generate(ENV)
       end
+      
       desc "2nd seeding task with methods"
       task :generate4 => :environment do
         puts Post.count
